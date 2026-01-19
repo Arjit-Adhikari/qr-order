@@ -3,114 +3,118 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Admin - Orders</title>
+  <title>Kahun Danda Resort Tappu - Admin POS</title>
   <style>
     body{font-family:Arial, sans-serif;margin:0;background:#f6f6f6}
     header{background:#111;color:#fff;padding:14px 16px;position:sticky;top:0}
     .wrap{max-width:1100px;margin:0 auto;padding:16px}
-    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:12px}
-    .card{background:#fff;border-radius:12px;padding:12px;box-shadow:0 2px 10px rgba(0,0,0,.06)}
+    .top{display:flex;justify-content:space-between;align-items:center;gap:10px}
     .muted{color:#666;font-size:14px}
-    .badge{display:inline-block;padding:4px 10px;border-radius:999px;background:#eee;font-size:12px}
-    button{border:none;border-radius:10px;padding:8px 10px;cursor:pointer}
-    .btn{background:#1b7bff;color:#fff}
-    .btn2{background:#111;color:#fff}
-    .line{border-top:1px solid #eee;margin:10px 0}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:12px;margin-top:12px}
+    .card{background:#fff;border-radius:12px;padding:14px;box-shadow:0 2px 10px rgba(0,0,0,.06)}
+    .badge{background:#eee;border-radius:999px;padding:4px 10px;font-size:12px}
+    .row{display:flex;justify-content:space-between;align-items:center;gap:10px}
+    .btn{border:none;border-radius:10px;padding:10px 12px;cursor:pointer}
+    .b1{background:#1b7bff;color:#fff}
+    .b2{background:#111;color:#fff}
+    .b3{background:#e53935;color:#fff}
     ul{margin:8px 0 0 18px}
-.danger {
-  background: #e53935;
-  color: white;
-}
-
+    hr{border:none;border-top:1px solid #eee;margin:12px 0}
   </style>
 </head>
 <body>
   <header>
-    <div class="wrap" style="display:flex;justify-content:space-between;align-items:center;gap:10px;">
+    <div class="wrap top">
       <div>
-        <div style="font-weight:700;">Admin POS / Orders</div>
+        <div style="font-weight:700;font-size:18px;">Kahun Danda Resort Tappu - Admin POS / Orders</div>
         <div class="muted">Auto refresh every 3 seconds</div>
       </div>
-      <button class="btn2" onclick="load()">Refresh</button>
+      <button class="btn b2" onclick="load()">Refresh</button>
     </div>
   </header>
 
   <div class="wrap">
-    <div id="stats" class="muted" style="margin-bottom:10px;"></div>
-    <div class="grid" id="orders"></div>
+    <div class="muted">Total orders: <span id="count">0</span></div>
+    <div class="grid" id="list"></div>
   </div>
 
 <script>
   function money(n){ return Number(n||0).toFixed(0); }
 
-  async function load(){
-    const res = await fetch("/api/orders");
-    const orders = await res.json();
+  async function api(url, options={}){
+    const res = await fetch(url, options);
+    const data = await res.json().catch(()=> ({}));
+    if(!res.ok) throw new Error(data.error || "Request failed");
+    return data;
+  }
 
-    document.getElementById("stats").textContent = `Total orders: ${orders.length}`;
-    const root = document.getElementById("orders");
-    root.innerHTML = "";
-
-    orders.forEach(o => {
-      const total = (o.items||[]).reduce((s,it)=> s + (Number(it.price)||0)*Number(it.qty||1), 0);
-
-      const div = document.createElement("div");
-      div.className = "card";
-      div.innerHTML = `
-        <div style="display:flex;justify-content:space-between;gap:8px;align-items:center;">
-          <div style="font-weight:700;">${o._id}</div>
-          <span class="badge">${o.status}</span>
-        </div>
-        <div class="muted">Table: <b>${o.table}</b></div>
-        <div class="muted">Time: ${new Date(o.createdAt).toLocaleString()}</div>
-        <div class="line"></div>
-        <div><b>Items</b></div>
-        <ul>
-          ${(o.items||[]).map(it => `<li>${it.name} — Rs ${money(it.price)} x ${it.qty}</li>`).join("")}
-        </ul>
-        ${o.customerNote ? `<div class="line"></div><div class="muted"><b>Note:</b> ${o.customerNote}</div>` : ""}
-        <div class="line"></div>
-        <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;">
-          <div style="font-weight:700;">Total: Rs ${money(total)}</div>
-          <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end;">
-            <button class="btn" onclick="setStatus('${o._id}','preparing')">Preparing</button>
-            <button class="btn" onclick="setStatus('${o._id}','ready')">Ready</button>
-            <button class="btn" onclick="setStatus('${o._id}','served')">Served</button>
-<button class="danger" onclick="deleteOrder('${o._id}')">Delete</button>
-
-          </div>
-        </div>
-      `;
-      root.appendChild(div);
-    });
-
-    if(orders.length === 0){
-      root.innerHTML = `<div class="muted">No orders yet.</div>`;
-    }
+  function fmtTime(iso){
+    const d = new Date(iso);
+    return d.toLocaleString();
   }
 
   async function setStatus(id, status){
-    await fetch("/api/orders/" + id, {
+    await api("/api/orders/" + id, {
       method:"PATCH",
       headers: {"Content-Type":"application/json"},
-      body: JSON.stringify({status})
+      body: JSON.stringify({ status })
     });
     load();
   }
 
+  async function deleteOrder(id){
+    if(!confirm("Delete this order permanently?")) return;
+    await api("/api/orders/" + id, { method:"DELETE" });
+    load();
+  }
+
+  async function load(){
+    try{
+      const orders = await api("/api/orders");
+      document.getElementById("count").textContent = orders.length;
+
+      const list = document.getElementById("list");
+      list.innerHTML = "";
+
+      orders.forEach(o => {
+        const total = (o.items||[]).reduce((s,it)=> s + (Number(it.price)||0) * (Number(it.qty)||0), 0);
+
+        const card = document.createElement("div");
+        card.className = "card";
+        card.innerHTML = `
+          <div class="row">
+            <div style="font-weight:700;">${o._id}</div>
+            <div class="badge">${o.status || "pending"}</div>
+          </div>
+          <div class="muted">Table: ${o.table}</div>
+          <div class="muted">Time: ${fmtTime(o.createdAt)}</div>
+          <hr/>
+          <div style="font-weight:700;">Items</div>
+          <ul>
+            ${(o.items||[]).map(it => `<li>${it.name} — Rs ${money(it.price)} x ${it.qty}</li>`).join("")}
+          </ul>
+          ${o.customerNote ? `<div class="muted" style="margin-top:8px;"><b>Note:</b> ${o.customerNote}</div>` : ""}
+          <hr/>
+          <div class="row">
+            <div style="font-weight:700;">Total: Rs ${money(total)}</div>
+            <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end;">
+              <button class="btn b1" onclick="setStatus('${o._id}','preparing')">Preparing</button>
+              <button class="btn b1" onclick="setStatus('${o._id}','ready')">Ready</button>
+              <button class="btn b1" onclick="setStatus('${o._id}','served')">Served</button>
+              <button class="btn b3" onclick="deleteOrder('${o._id}')">Delete</button>
+            </div>
+          </div>
+        `;
+        list.appendChild(card);
+      });
+
+    }catch(e){
+      alert("Admin load error: " + e.message);
+    }
+  }
+
   load();
   setInterval(load, 3000);
- async function deleteOrder(id){
-    if(!confirm("Delete this order?")) return;
-
-    const res = await fetch("/api/orders/" + id, { method: "DELETE" });
-    const data = await res.json().catch(()=> ({}));
-    if(!res.ok){
-      alert(data.error || "Delete failed");
-      return;
-    }
-    loadOrders(); // existing function should reload orders
-  }
 </script>
 </body>
 </html>

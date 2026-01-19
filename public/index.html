@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>QR Order - Menu</title>
+  <title>Kahun Danda Resort Tappu - QR Menu</title>
   <style>
     body{font-family:Arial, sans-serif;margin:0;background:#f6f6f6}
     header{background:#111;color:#fff;padding:14px 16px;position:sticky;top:0}
@@ -26,7 +26,7 @@
   <header>
     <div class="wrap" style="display:flex;justify-content:space-between;align-items:center;gap:10px;">
       <div>
-        <div style="font-weight:700;">QR Order Menu</div>
+        <div style="font-weight:700;">Kahun Danda Resort Tappu</div>
         <div class="muted" id="tableText">Table: -</div>
       </div>
       <button class="btn2" onclick="scrollToCart()">Cart (<span id="cartCount">0</span>)</button>
@@ -71,7 +71,7 @@
   document.getElementById("tableText").textContent = "Table: " + table;
 
   let menuItems = [];
-  let cart = {}; // name -> {name, price, qty}
+  let cart = {};
 
   function money(n){ return Number(n||0).toFixed(0); }
 
@@ -82,11 +82,10 @@
     const menuDiv = document.getElementById("menu");
     menuDiv.innerHTML = "";
 
-    // group by category
     const groups = {};
     menuItems.forEach(it => {
       const c = it.category || "General";
-      if(!groups[c]) groups[c] = [];
+      groups[c] = groups[c] || [];
       groups[c].push(it);
     });
 
@@ -100,15 +99,19 @@
         const row = document.createElement("div");
         row.className = "item";
 
-        // avoid putting ${} inside PowerShell strings by building button via JS only
+        const safeName = (it.name || "").replace(/"/g, "&quot;");
         row.innerHTML = `
           <div>
-            <div style="font-weight:700">${it.name}</div>
+            <div style="font-weight:700">${safeName}</div>
             <div class="muted">Rs ${money(it.price)}</div>
           </div>
-          <button class="btn">Add</button>
+          <button class="btn" data-name="${safeName}" data-price="${it.price}">Add</button>
         `;
-        row.querySelector("button").addEventListener("click", () => addToCart(it));
+
+        row.querySelector("button").addEventListener("click", () => {
+          addToCart({ name: it.name, price: it.price });
+        });
+
         menuDiv.appendChild(row);
       });
     });
@@ -140,22 +143,19 @@
 
       const row = document.createElement("div");
       row.className = "item";
+
+      const safe = it.name.replace(/'/g, "\\'");
       row.innerHTML = `
         <div>
           <div style="font-weight:700">${it.name}</div>
           <div class="muted">Rs ${money(it.price)} x ${it.qty}</div>
         </div>
         <div class="qty">
-          <button>-</button>
+          <button onclick="changeQty('${safe}', -1)">-</button>
           <div style="min-width:18px;text-align:center;font-weight:700">${it.qty}</div>
-          <button>+</button>
+          <button onclick="changeQty('${safe}', 1)">+</button>
         </div>
       `;
-
-      const btns = row.querySelectorAll("button");
-      btns[0].addEventListener("click", () => changeQty(it.name, -1));
-      btns[1].addEventListener("click", () => changeQty(it.name, 1));
-
       cartDiv.appendChild(row);
     });
 
