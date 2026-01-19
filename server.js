@@ -90,16 +90,17 @@ app.patch("/api/orders/:id", async (req, res) => {
 
 async function start() {
   if (!MONGODB_URI) {
-    console.error("? Missing MONGODB_URI environment variable");
+    console.error("❌ Missing MONGODB_URI environment variable");
     process.exit(1);
   }
   await mongoose.connect(MONGODB_URI);
-  console.log("? MongoDB connected");
+  console.log("✅ MongoDB connected");
 
-  app.listen(PORT, () => console.log(? Server running on port ));
+  app.listen(PORT, () => console.log(`✅ Server running on port ${PORT}`));
 }
 
 start().catch(err => {
-  console.error("? Failed to start:", err);
+  console.error("❌ Failed to start:", err);
   process.exit(1);
 });
+
