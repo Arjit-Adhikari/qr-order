@@ -17,6 +17,11 @@
     .btn2{background:#111;color:#fff}
     .line{border-top:1px solid #eee;margin:10px 0}
     ul{margin:8px 0 0 18px}
+.danger {
+  background: #e53935;
+  color: white;
+}
+
   </style>
 </head>
 <body>
@@ -71,6 +76,8 @@
             <button class="btn" onclick="setStatus('${o._id}','preparing')">Preparing</button>
             <button class="btn" onclick="setStatus('${o._id}','ready')">Ready</button>
             <button class="btn" onclick="setStatus('${o._id}','served')">Served</button>
+<button class="danger" onclick="deleteOrder('${o._id}')">Delete</button>
+
           </div>
         </div>
       `;
@@ -93,6 +100,17 @@
 
   load();
   setInterval(load, 3000);
+ async function deleteOrder(id){
+    if(!confirm("Delete this order?")) return;
+
+    const res = await fetch("/api/orders/" + id, { method: "DELETE" });
+    const data = await res.json().catch(()=> ({}));
+    if(!res.ok){
+      alert(data.error || "Delete failed");
+      return;
+    }
+    loadOrders(); // existing function should reload orders
+  }
 </script>
 </body>
 </html>

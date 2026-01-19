@@ -87,6 +87,12 @@ app.patch("/api/orders/:id", async (req, res) => {
 
   res.json({ ok: true });
 });
+app.delete("/api/orders/:id", async (req, res) => {
+  const deleted = await Order.findByIdAndDelete(req.params.id);
+  if (!deleted) return res.status(404).json({ error: "order not found" });
+  res.json({ ok: true });
+});
+
 
 async function start() {
   if (!MONGODB_URI) {
