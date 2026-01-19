@@ -1,0 +1,383 @@
+{
+  "restaurant": "Kahun Danda Resort Tappu",
+  "currency": "NPR",
+  "categories": [
+    {
+      "name": "Espresso Based Beverages",
+      "items": [
+        { "name": "Espresso", "price": 95 },
+        { "name": "Doppio", "price": 125 },
+        { "name": "Americano (Single)", "price": 145 },
+        { "name": "Americano (Double)", "price": 165 },
+        { "name": "Espresso Affagato", "price": 195 },
+        { "name": "Hot Chocolate", "price": 195 },
+        { "name": "Cappuccino", "price": 175 },
+        { "name": "Cafe Latte", "price": 195 },
+        { "name": "Caramel Latte", "price": 215 },
+        { "name": "Cafe Mocha", "price": 225 },
+        { "name": "Honey Latte", "price": 230 }
+      ]
+    },
+    {
+      "name": "Teas & Hot Drinks",
+      "items": [
+        { "name": "Black Tea", "price": 45 },
+        { "name": "Green Tea", "price": 120 },
+        { "name": "Milk Tea", "price": 65 },
+        { "name": "Masala Tea", "price": 75 },
+        { "name": "Lemon/Ginger Tea", "price": 75 },
+        { "name": "Milk Coffee", "price": 105 },
+        { "name": "Black Coffee", "price": 75 },
+        { "name": "Hot Lemon with Honey", "price": 155 },
+        { "name": "Kahun Special Tea", "price": 95 }
+      ]
+    },
+    {
+      "name": "Iced Beverages",
+      "items": [
+        { "name": "Iced Lemonade", "price": 165 },
+        { "name": "Iced Americano", "price": 175 },
+        { "name": "Iced Lemon Tea", "price": 195 },
+        { "name": "Mint Lemonade", "price": 195 },
+        { "name": "Iced Cappuccino", "price": 195 },
+        { "name": "Iced Latte", "price": 215 },
+        { "name": "Iced Mocha", "price": 225 },
+        { "name": "Blue Ocean", "price": 220 }
+      ]
+    },
+    {
+      "name": "Fresh Juice",
+      "items": [
+        { "name": "Watermelon", "price": 275 },
+        { "name": "Pineapple", "price": 350 },
+        { "name": "Orange", "price": 295 },
+        { "name": "Mixed", "price": 350 }
+      ]
+    },
+    {
+      "name": "Blended Items",
+      "items": [
+        { "name": "Plain Lassi", "price": 175 },
+        { "name": "Banana Lassi", "price": 195 },
+        { "name": "Any Flavour Lassi", "price": 225 },
+        { "name": "Oreo Shake", "price": 250 },
+        { "name": "Ice-cream Shake", "price": 295 },
+        { "name": "Oreo Kitkat Shake", "price": 315 },
+        { "name": "Kitkat Shake", "price": 250 },
+        { "name": "Ice-Cream (Single Scoop)", "price": 105 },
+        { "name": "Ice-Cream (Double Scoops)", "price": 195 }
+      ]
+    },
+    {
+      "name": "Cold Drinks",
+      "items": [
+        { "name": "Mineral Water", "price": 35 },
+        { "name": "Coke/Sprite/Fanta", "price": 80 },
+        { "name": "Lemon Sprite (with Black Salt)", "price": 115 },
+        { "name": "Red Juice (Per Glass)", "price": 95 },
+        { "name": "Lemon Soda", "price": 120 },
+        { "name": "Red Bull (Red)", "price": 195 },
+        { "name": "Red Bull (Blue)", "price": 395 },
+        { "name": "Apple Cider", "price": 350 },
+        { "name": "Jumbo Coke (1 Ltr)", "price": 315 }
+      ]
+    },
+    {
+      "name": "Breakfast",
+      "items": [
+        { "name": "Simple Breakfast", "price": 295, "note": "Toast with butter/jam, mash potato, omlet, tea or coffee" },
+        { "name": "Kahun Special Breakfast", "price": 385, "note": "Toast with butter/jam, hash brown potato, egg any style, fruit, juice, tea or coffee" },
+        { "name": "Mushroom Omlet", "price": 185 },
+        { "name": "Masala Omlet", "price": 180 },
+        { "name": "Cheese Omlet", "price": 195 },
+        { "name": "Poarched Egg on Toast", "price": 195 },
+        { "name": "Scrambled Egg on Toast", "price": 195 },
+        { "name": "Fried Egg", "price": 195 },
+        { "name": "Boiled Egg (Per Pcs)", "price": 65 }
+      ]
+    },
+    {
+      "name": "Indian Breakfast",
+      "items": [
+        { "name": "Puri Bhaji", "price": 215, "note": "Served with curry, 3 pcs of puri" },
+        { "name": "Alu Partha", "price": 195 },
+        { "name": "Laccha Paratha", "price": 195, "note": "With pickle & curd" }
+      ]
+    },
+    {
+      "name": "Soup",
+      "items": [
+        { "name": "Mushroom Cream Soup", "price": 255 },
+        { "name": "Chicken Cream Soup", "price": 255 },
+        { "name": "Mix Cream Soup", "price": 395 },
+        { "name": "Hot & Sour Soup (Veg)", "price": 175 },
+        { "name": "Hot & Sour Soup (Chicken)", "price": 225 },
+        { "name": "Clear Soup (Veg)", "price": 175 },
+        { "name": "Clear Soup (Non-Veg)", "price": 225 }
+      ]
+    },
+    {
+      "name": "Sekuwa By Kilo",
+      "items": [
+        { "name": "Chicken Sekuwa 250gm", "price": 395 },
+        { "name": "Chicken Sekuwa 500gm", "price": 750 },
+        { "name": "Chicken Sekuwa 1000gm", "price": 1395 },
+        { "name": "Buff Sekuwa 250gm", "price": 395 },
+        { "name": "Buff Sekuwa 500gm", "price": 750 },
+        { "name": "Buff Sekuwa 1000gm", "price": 1395 },
+        { "name": "Pork Sekuwa 250gm", "price": 450 },
+        { "name": "Pork Sekuwa 500gm", "price": 850 },
+        { "name": "Pork Sekuwa 1000gm", "price": 1500 },
+        { "name": "Mutton Sekuwa 250gm", "price": 770 },
+        { "name": "Mutton Sekuwa 500gm", "price": 1425 },
+        { "name": "Mutton Sekuwa 1000gm", "price": 1850 },
+        { "name": "Bhuja Set (Bhuja, Pickle & Salad)", "price": 75 },
+        { "name": "Sekuwa Platter (Chicken, Pork & Mutton)", "price": 1495 }
+      ]
+    },
+    {
+      "name": "Snacks - Sadeko",
+      "items": [
+        { "name": "Chicken Sadeko (Boiled/Fry)", "price": 395 },
+        { "name": "Sukuti Sadeko", "price": 425 },
+        { "name": "Pangra Sadeko", "price": 395 },
+        { "name": "Sausage Sadeko", "price": 350 },
+        { "name": "ChauChau Sadeko", "price": 155 },
+        { "name": "Bhatta Sadeko", "price": 165 },
+        { "name": "Peanut Sadeko", "price": 195 },
+        { "name": "Mix Sadeko (Bhatta, Peanut, Chauchau)", "price": 195 },
+        { "name": "Mushroom Sadeko", "price": 395 }
+      ]
+    },
+    {
+      "name": "Chilly",
+      "items": [
+        { "name": "Chicken Chilly", "price": 415 },
+        { "name": "Sausage Chilly", "price": 375 },
+        { "name": "Pork Chilly", "price": 425 },
+        { "name": "Prawn Chilly", "price": 695 },
+        { "name": "Chips Chilly", "price": 265 },
+        { "name": "Mushroom Chilly", "price": 315 },
+        { "name": "Paneer Chilly", "price": 395 }
+      ]
+    },
+    {
+      "name": "Burger / Sandwich",
+      "items": [
+        { "name": "Veg Burger", "price": 195 },
+        { "name": "Chicken Burger", "price": 315 },
+        { "name": "Veg Sandwich", "price": 265 },
+        { "name": "Chicken Sandwich", "price": 315 },
+        { "name": "Kahun Special Burger/Sandwich", "price": 395 }
+      ]
+    },
+    {
+      "name": "Pizza",
+      "items": [
+        { "name": "Margarita Pizza (Small)", "price": 300 },
+        { "name": "Margarita Pizza (Large)", "price": 590 },
+        { "name": "Mushroom Pizza (Small)", "price": 320 },
+        { "name": "Mushroom Pizza (Large)", "price": 620 },
+        { "name": "Chicken Pizza (Small)", "price": 360 },
+        { "name": "Chicken Pizza (Large)", "price": 740 },
+        { "name": "Kahun Special Pizza (Small)", "price": 495 },
+        { "name": "Kahun Special Pizza (Large)", "price": 990 }
+      ]
+    },
+    {
+      "name": "Pizza Add On",
+      "items": [
+        { "name": "Cheese (Small)", "price": 50 },
+        { "name": "Cheese (Large)", "price": 100 },
+        { "name": "Mushroom (Small)", "price": 50 },
+        { "name": "Mushroom (Large)", "price": 100 },
+        { "name": "Sausage (Small)", "price": 50 },
+        { "name": "Sausage (Large)", "price": 100 }
+      ]
+    },
+    {
+      "name": "Pasta / Noodles",
+      "items": [
+        { "name": "Veg Pasta (Bechumol Sauce)", "price": 295 },
+        { "name": "Veg Pasta (Nepolina Sauce)", "price": 275 },
+        { "name": "Chicken Pasta (White Sauce)", "price": 395 },
+        { "name": "Chicken Pasta (Red Sauce)", "price": 375 }
+      ]
+    },
+    {
+      "name": "Mo:Mo's (Chicken)",
+      "items": [
+        { "name": "Steam", "price": 195 },
+        { "name": "Fried", "price": 215 },
+        { "name": "Kothey", "price": 235 },
+        { "name": "Chilly", "price": 295 },
+        { "name": "Jhol", "price": 325 }
+      ]
+    },
+    {
+      "name": "Chowmin",
+      "items": [
+        { "name": "Veg Chowmin", "price": 165 },
+        { "name": "Egg Chowmin", "price": 185 },
+        { "name": "Chicken Chowmin", "price": 195 },
+        { "name": "Mix Chowmin", "price": 255 }
+      ]
+    },
+    {
+      "name": "Thuppa",
+      "items": [
+        { "name": "Veg Thuppa", "price": 185 },
+        { "name": "Egg Thuppa", "price": 195 },
+        { "name": "Chicken Thuppa", "price": 225 },
+        { "name": "Mix Thuppa", "price": 280 },
+        { "name": "Kahun Special Combo Thuppa", "price": 395, "note": "Dry combo (momo & chowmein)" },
+        { "name": "Dry Combo (Mo:Mo & Chowmein)", "price": 225 }
+      ]
+    },
+    {
+      "name": "Chopsuey",
+      "items": [
+        { "name": "Veg Chopsuey", "price": 255 },
+        { "name": "Chicken Chopsuey", "price": 295 },
+        { "name": "Mix Chopsuey", "price": 355 }
+      ]
+    },
+    {
+      "name": "Thali Set",
+      "items": [
+        { "name": "Veg Thali Set", "price": 395 },
+        { "name": "Chicken Thali Set", "price": 495 },
+        { "name": "Pork Thali Set", "price": 575 },
+        { "name": "Fish Thali Set", "price": 575 },
+        { "name": "Mutton Thali Set", "price": 625 }
+      ]
+    },
+    {
+      "name": "Nanglo Set",
+      "items": [
+        { "name": "Nanglo Set (Small)", "price": 1600 },
+        { "name": "Nanglo Set (Large)", "price": 3200 }
+      ]
+    },
+    {
+      "name": "Kahun Danda Special",
+      "items": [
+        { "name": "Nuggets Chicken", "price": 425 },
+        { "name": "Dragon Chicken", "price": 425 },
+        { "name": "Bangbang Chicken", "price": 425 },
+        { "name": "Crispy Chicken", "price": 425 },
+        { "name": "Crispy Sausage Fry", "price": 425 }
+      ]
+    },
+    {
+      "name": "Main Course",
+      "items": [
+        { "name": "Chicken Sizzler", "price": 795 },
+        { "name": "Grilled Chicken", "price": 695 },
+        { "name": "Grilled Fish", "price": 695 },
+        { "name": "Pork Chop", "price": 895 },
+        { "name": "Grilled Pork", "price": 695 }
+      ]
+    },
+    {
+      "name": "Sabaiko Favorite",
+      "items": [
+        { "name": "Masala Papad", "price": 165 },
+        { "name": "French Fry", "price": 225 },
+        { "name": "Thicheko Aalu", "price": 195 },
+        { "name": "Mustange Aalu", "price": 195 },
+        { "name": "Veg Pakauda", "price": 215 },
+        { "name": "Tempura", "price": 215 },
+        { "name": "Veg Boiled", "price": 225 },
+        { "name": "Aalu Stick", "price": 60 },
+        { "name": "Kaju Fry", "price": 425 },
+        { "name": "Sausage (Boiled)", "price": 265 },
+        { "name": "Sausage (Fry)", "price": 295 },
+        { "name": "Pangra (Fry)", "price": 375 },
+        { "name": "Pangra (Gravy)", "price": 395 },
+        { "name": "Pork Tawa", "price": 395 },
+        { "name": "Kalejo Fry", "price": 395 },
+        { "name": "Chicken Lolipop (6 Pcs)", "price": 425 },
+        { "name": "Buffalo Wings (3 Pcs)", "price": 425 },
+        { "name": "Mutton Bhutuwa", "price": 395 },
+        { "name": "Hyakula Damedko", "price": 495 }
+      ]
+    },
+    {
+      "name": "Khaja Set",
+      "items": [
+        { "name": "Chicken Khaja Set", "price": 495 },
+        { "name": "Veg Khaja Set", "price": 425 },
+        { "name": "Mutton Khaja Set", "price": 615 },
+        { "name": "Pork Khaja Set", "price": 525 }
+      ]
+    },
+    {
+      "name": "Indo-Nepali Curry",
+      "items": [
+        { "name": "Veg Curry", "price": 285 },
+        { "name": "Chicken Curry", "price": 355 },
+        { "name": "Fish Curry", "price": 365 },
+        { "name": "Mutton Curry", "price": 425 },
+        { "name": "Pork Curry", "price": 395 },
+        { "name": "Buff Curry", "price": 395 }
+      ]
+    },
+    {
+      "name": "Rice & Roti",
+      "items": [
+        { "name": "Plain Rice", "price": 175 },
+        { "name": "Jeera Rice", "price": 180 },
+        { "name": "Sukha Roti (Chapati) - Per Pcs", "price": 45 }
+      ]
+    },
+    {
+      "name": "Pulao & Biryani",
+      "items": [
+        { "name": "Veg Pulao", "price": 255 },
+        { "name": "Veg Biryani", "price": 395 },
+        { "name": "Chicken Biryani", "price": 495 }
+      ]
+    },
+    {
+      "name": "1 Chicken 4 Items",
+      "items": [
+        { "name": "Regular (Poleko Chhoila, Gravy & Soup)", "price": 3000 },
+        { "name": "Big (Poleko Chhoila, Gravy & Soup)", "price": 4000 }
+      ]
+    },
+    {
+      "name": "BBQ",
+      "items": [
+        { "name": "BBQ Chicken", "price": 1395 },
+        { "name": "BBQ Pork", "price": 1500 }
+      ]
+    },
+    {
+      "name": "Fry Rice",
+      "items": [
+        { "name": "Veg Fry Rice", "price": 245 },
+        { "name": "Chicken Fry Rice", "price": 295 },
+        { "name": "Egg Fry Rice", "price": 255 },
+        { "name": "Mix Fry Rice", "price": 345 }
+      ]
+    },
+    {
+      "name": "Choila",
+      "items": [
+        { "name": "Duck Choila (Hash ko Choila)", "price": 495 },
+        { "name": "Chicken Choila", "price": 415 },
+        { "name": "Mutton Choila", "price": 625 }
+      ]
+    },
+    {
+      "name": "Salad",
+      "items": [
+        { "name": "Hario Pariyo Salad", "price": 195 },
+        { "name": "Fruit Salad", "price": 395 },
+        { "name": "Grilled Chicken Salad", "price": 425 },
+        { "name": "Russian Salad", "price": 295 }
+      ]
+    }
+  ]
+}
