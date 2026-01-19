@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin - Orders</title>
+  <style>
+    body{font-family:Arial, sans-serif;margin:0;background:#f6f6f6}
+    header{background:#111;color:#fff;padding:14px 16px;position:sticky;top:0}
+    .wrap{max-width:1100px;margin:0 auto;padding:16px}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:12px}
+    .card{background:#fff;border-radius:12px;padding:12px;box-shadow:0 2px 10px rgba(0,0,0,.06)}
+    .muted{color:#666;font-size:14px}
+    .badge{display:inline-block;padding:4px 10px;border-radius:999px;background:#eee;font-size:12px}
+    button{border:none;border-radius:10px;padding:8px 10px;cursor:pointer}
+    .btn{background:#1b7bff;color:#fff}
+    .btn2{background:#111;color:#fff}
+    .line{border-top:1px solid #eee;margin:10px 0}
+    ul{margin:8px 0 0 18px}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap" style="display:flex;justify-content:space-between;align-items:center;gap:10px;">
+      <div>
+        <div style="font-weight:700;">Admin POS / Orders</div>
+        <div class="muted">Auto refresh every 3 seconds</div>
+      </div>
+      <button class="btn2" onclick="load()">Refresh</button>
+    </div>
+  </header>
+
+  <div class="wrap">
+    <div id="stats" class="muted" style="margin-bottom:10px;"></div>
+    <div class="grid" id="orders"></div>
+  </div>
+
+<script>
+  function money(n){ return Number(n||0).toFixed(0); }
+
+  async function load(){
+    const res = await fetch("/api/orders");
+    const orders = await res.json();
+
+    document.getElementById("stats").textContent = `Total orders: ${orders.length}`;
+    const root = document.getElementById("orders");
+    root.innerHTML = "";
+
+    orders.forEach(o => {
+      const total = (o.items||[]).reduce((s,it)=> s + (Number(it.price)||0)*Number(it.qty||1), 0);
+
+      const div = document.createElement("div");
+      div.className = "card";
+      div.innerHTML = `
+        <div style="display:flex;justify-content:space-between;gap:8px;align-items:center;">
+          <div style="font-weight:700;">${o._id}</div>
+          <span class="badge">${o.status}</span>
+        </div>
+        <div class="muted">Table: <b>${o.table}</b></div>
+        <div class="muted">Time: ${new Date(o.createdAt).toLocaleString()}</div>
+        <div class="line"></div>
+        <div><b>Items</b></div>
+        <ul>
+          ${(o.items||[]).map(it => `<li>${it.name} — Rs ${money(it.price)} x ${it.qty}</li>`).join("")}
+        </ul>
+        ${o.customerNote ? `<div class="line"></div><div class="muted"><b>Note:</b> ${o.customerNote}</div>` : ""}
+        <div class="line"></div>
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;">
+          <div style="font-weight:700;">Total: Rs ${money(total)}</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end;">
+            <button class="btn" onclick="setStatus('${o._id}','preparing')">Preparing</button>
+            <button class="btn" onclick="setStatus('${o._id}','ready')">Ready</button>
+            <button class="btn" onclick="setStatus('${o._id}','served')">Served</button>
+          </div>
+        </div>
+      `;
+      root.appendChild(div);
+    });
+
+    if(orders.length === 0){
+      root.innerHTML = `<div class="muted">No orders yet.</div>`;
+    }
+  }
+
+  async function setStatus(id, status){
+    await fetch("/api/orders/" + id, {
+      method:"PATCH",
+      headers: {"Content-Type":"application/json"},
+      body: JSON.stringify({status})
+    });
+    load();
+  }
+
+  load();
+  setInterval(load, 3000);
+</script>
+</body>
+</html>
